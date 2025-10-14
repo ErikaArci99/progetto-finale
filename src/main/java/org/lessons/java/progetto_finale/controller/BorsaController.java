@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.security.core.Authentication;
 
 @Controller
 @RequestMapping("/admin/borse")
@@ -27,41 +28,26 @@ public class BorsaController {
     }
 
     @GetMapping
-    public String list(Model model) {
+    public String list(Model model, Authentication authentication) {
         List<Borsa> borse = borsaService.findAll();
         model.addAttribute("borse", borse);
+        model.addAttribute("username", authentication.getName());
+        model.addAttribute("ruolo", authentication.getAuthorities());
         return "borse/list";
     }
 
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model) {
-        Borsa borsa = borsaService.findById(id).orElseThrow(() -> new IllegalArgumentException("Borsa non trovata"));
+        Borsa borsa = borsaService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Borsa non trovata"));
         model.addAttribute("borsa", borsa);
         return "borse/detail";
     }
 
-    @GetMapping("/create")
-    public String createForm(Model model) {
-        model.addAttribute("borsa", new Borsa());
-        model.addAttribute("collezioni", collezioneService.findAll());
-        model.addAttribute("sconti", scontoService.findAll());
-        return "borse/create";
-    }
-
-    @PostMapping("/create")
-    public String create(@Valid @ModelAttribute Borsa borsa, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("collezioni", collezioneService.findAll());
-            model.addAttribute("sconti", scontoService.findAll());
-            return "borse/create";
-        }
-        borsaService.save(borsa);
-        return "redirect:/admin/borse";
-    }
-
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
-        Borsa borsa = borsaService.findById(id).orElseThrow(() -> new IllegalArgumentException("Borsa non trovata"));
+        Borsa borsa = borsaService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Borsa non trovata"));
         model.addAttribute("borsa", borsa);
         model.addAttribute("collezioni", collezioneService.findAll());
         model.addAttribute("sconti", scontoService.findAll());
@@ -74,7 +60,7 @@ public class BorsaController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("collezioni", collezioneService.findAll());
             model.addAttribute("sconti", scontoService.findAll());
-            return "borsa/edit";
+            return "borse/edit";
         }
         borsa.setId(id);
         borsaService.save(borsa);

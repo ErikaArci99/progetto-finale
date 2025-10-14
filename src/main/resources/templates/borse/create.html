@@ -4,7 +4,8 @@
 <head th:replace="fragments/head :: commonHead('Crea Nuova Borsa')"></head>
 
 <body>
-    <div th:replace="fragments/navbar :: navbar(${#httpServletRequest.remoteUser}, 'ADMIN')"></div>
+    <div th:replace="fragments/navbar :: navbar(${users}, ${roles})"></div>
+
 
     <div class="container mt-5">
         <h1>Crea Nuova Borsa</h1>

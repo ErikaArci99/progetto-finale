@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 import jakarta.validation.Valid;
 
@@ -20,8 +21,10 @@ public class CollezioneController {
     }
 
     @GetMapping
-    public String list(Model model) {
+    public String list(Model model, Authentication authentication) {
         model.addAttribute("collezioni", collezioneService.findAll());
+        model.addAttribute("users", authentication.getName());
+        model.addAttribute("roles", authentication.getAuthorities());
         return "collezioni/list";
     }
 
