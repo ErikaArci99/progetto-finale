@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: commonHead('Lista Sconti')"></head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar(${#httpServletRequest.remoteUser}, 'ADMIN')"></div>
+
+    <div class="container mt-5">
+        <h1>Sconti</h1>
+        <a th:href="@{/admin/sconti/create}" class="btn btn-success mb-3">Crea Nuovo Sconto</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Percentuale</th>
+                    <th>Data Inizio</th>
+                    <th>Data Fine</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sconto : ${sconti}">
+                    <td th:text="${sconto.percentuale} + '%'">Percentuale</td>
+                    <td th:text="${sconto.dataInizio}">Data Inizio</td>
+                    <td th:text="${sconto.dataFine}">Data Fine</td>
+                    <td>
+                        <a th:href="@{/admin/sconti/edit/{id}(id=${sconto.id})}"
+                            class="btn btn-warning btn-sm">Modifica</a>
+                        <form th:action="@{/admin/sconti/delete/{id}(id=${sconto.id})}" method="post"
+                            style="display:inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: commonScripts"></div>
+</body>
+
+</html>

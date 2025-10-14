@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: commonHead('Dettaglio Borsa')"></head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar(${#httpServletRequest.remoteUser}, 'ADMIN')"></div>
+
+    <div class="container mt-5">
+        <h1 th:text="${borsa.nome}">Nome Borsa</h1>
+
+        <div class="mb-3">
+            <strong>Descrizione:</strong>
+            <p th:text="${borsa.descrizione}"></p>
+        </div>
+
+        <div class="mb-3">
+            <strong>Prezzo:</strong>
+            <span th:text="${borsa.prezzo}"></span>
+        </div>
+
+        <div class="mb-3">
+            <strong>Collezione:</strong>
+            <span th:text="${borsa.collezione}"></span>
+        </div>
+
+        <div class="mb-3">
+            <strong>Sconto:</strong>
+            <span th:text="${borsa.sconto != null ? borsa.sconto.percentuale + '%' : 'Nessuno'}"></span>
+        </div>
+
+        <a th:href="@{/admin/borse}" class="btn btn-secondary">Indietro</a>
+        <a th:href="@{/admin/borse/edit/{id}(id=${borsa.id})}" class="btn btn-warning">Modifica</a>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: commonScripts"></div>
+</body>
+
+</html>

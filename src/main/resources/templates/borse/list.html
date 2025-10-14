@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: commonHead('Lista Borse')"></head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar(${#httpServletRequest.remoteUser}, 'ADMIN')"></div>
+
+    <div class="container mt-5">
+        <h1>Lista Borse</h1>
+        <a class="btn btn-primary mb-3" th:href="@{/admin/borse/create}">Aggiungi Nuova Borsa</a>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Prezzo</th>
+                    <th>Collezione</th>
+                    <th>Sconto</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="borsa : ${borse}">
+                    <td th:text="${borsa.id}"></td>
+                    <td th:text="${borsa.nome}"></td>
+                    <td th:text="${borsa.prezzo}"></td>
+                    <td th:text="${borsa.collezione}"></td>
+                    <td th:text="${borsa.sconto != null ? borsa.sconto.percentuale + '%' : 'Nessuno'}"></td>
+                    <td>
+                        <a class="btn btn-info btn-sm" th:href="@{/admin/borse/{id}(id=${borsa.id})}">Dettaglio</a>
+                        <a class="btn btn-warning btn-sm"
+                            th:href="@{/admin/borse/edit/{id}(id=${borsa.id})}">Modifica</a>
+                        <form th:action="@{/admin/borse/delete/{id}(id=${borsa.id})}" method="post"
+                            style="display:inline-block">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Sei sicuro di voler eliminare questa borsa?')">Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: commonScripts"></div>
+</body>
+
+</html>

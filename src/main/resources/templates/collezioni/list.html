@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: commonHead('Lista Collezioni')"></head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar(${#httpServletRequest.remoteUser}, 'ADMIN')"></div>
+
+    <div class="container mt-5">
+        <h1>Collezioni</h1>
+        <a th:href="@{/admin/collezioni/create}" class="btn btn-success mb-3">Crea Nuova Collezione</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Stagione</th>
+                    <th>Descrizione</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="collezione : ${collezioni}">
+                    <td th:text="${collezione.nome}">Nome</td>
+                    <td th:text="${collezione.stagione}">Stagione</td>
+                    <td th:text="${collezione.descrizione}">Descrizione</td>
+                    <td>
+                        <a th:href="@{/admin/collezioni/edit/{id}(id=${collezione.id})}"
+                            class="btn btn-warning btn-sm">Modifica</a>
+                        <form th:action="@{/admin/collezioni/delete/{id}(id=${collezione.id})}" method="post"
+                            style="display:inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: commonScripts"></div>
+</body>
+
+</html>

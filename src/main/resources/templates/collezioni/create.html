@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: commonHead('Crea Collezione')"></head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar(${#httpServletRequest.remoteUser}, 'ADMIN')"></div>
+
+    <div class="container mt-5">
+        <h1>Crea Collezione</h1>
+        <form th:action="@{/admin/collezioni/create}" th:object="${collezione}" method="post">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" th:field="*{nome}">
+                <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="stagione" class="form-label">Stagione</label>
+                <input type="text" class="form-control" id="stagione" th:field="*{stagione}">
+                <div th:if="${#fields.hasErrors('stagione')}" th:errors="*{stagione}" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="descrizione" class="form-label">Descrizione</label>
+                <textarea class="form-control" id="descrizione" th:field="*{descrizione}"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salva</button>
+            <a th:href="@{/admin/collezioni}" class="btn btn-secondary">Indietro</a>
+        </form>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: commonScripts"></div>
+</body>
+
+</html>
