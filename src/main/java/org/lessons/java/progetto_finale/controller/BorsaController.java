@@ -13,7 +13,7 @@ import java.util.List;
 import org.springframework.security.core.Authentication;
 
 @Controller
-@RequestMapping("/admin/borse")
+@RequestMapping("/borse")
 public class BorsaController {
 
     private final BorsaService borsaService;
@@ -27,49 +27,84 @@ public class BorsaController {
         this.scontoService = scontoService;
     }
 
+    // index (list)
     @GetMapping
     public String list(Model model, Authentication authentication) {
         List<Borsa> borse = borsaService.findAll();
         model.addAttribute("borse", borse);
-        model.addAttribute("username", authentication.getName());
-        model.addAttribute("ruolo", authentication.getAuthorities());
+        model.addAttribute("users", authentication.getName());
+        model.addAttribute("roles", authentication.getAuthorities());
         return "borse/list";
     }
 
+    // show (detail)
     @GetMapping("/{id}")
-    public String detail(@PathVariable Long id, Model model) {
+    public String detail(@PathVariable Long id, Model model, Authentication authentication) {
         Borsa borsa = borsaService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Borsa non trovata"));
         model.addAttribute("borsa", borsa);
+        model.addAttribute("users", authentication.getName());
+        model.addAttribute("roles", authentication.getAuthorities());
         return "borse/detail";
     }
 
+    // create form + create
+    @GetMapping("/create")
+    public String createForm(Model model, Authentication authentication) {
+        model.addAttribute("borsa", new Borsa());
+        model.addAttribute("collezioni", collezioneService.findAll());
+        model.addAttribute("sconti", scontoService.findAll());
+        model.addAttribute("users", authentication.getName());
+        model.addAttribute("roles", authentication.getAuthorities());
+        return "borse/create";
+    }
+
+    @PostMapping("/create")
+    public String create(@Valid @ModelAttribute Borsa borsa, BindingResult bindingResult, Model model,
+            Authentication authentication) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("collezioni", collezioneService.findAll());
+            model.addAttribute("sconti", scontoService.findAll());
+            model.addAttribute("users", authentication.getName());
+            model.addAttribute("roles", authentication.getAuthorities());
+            return "borse/create";
+        }
+        borsaService.save(borsa);
+        return "redirect:/borse";
+    }
+
+    // edit form + edit
     @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable Long id, Model model) {
+    public String editForm(@PathVariable Long id, Model model, Authentication authentication) {
         Borsa borsa = borsaService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Borsa non trovata"));
         model.addAttribute("borsa", borsa);
         model.addAttribute("collezioni", collezioneService.findAll());
         model.addAttribute("sconti", scontoService.findAll());
+        model.addAttribute("users", authentication.getName());
+        model.addAttribute("roles", authentication.getAuthorities());
         return "borse/edit";
     }
 
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable Long id, @Valid @ModelAttribute Borsa borsa, BindingResult bindingResult,
-            Model model) {
+            Model model, Authentication authentication) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("collezioni", collezioneService.findAll());
             model.addAttribute("sconti", scontoService.findAll());
+            model.addAttribute("users", authentication.getName());
+            model.addAttribute("roles", authentication.getAuthorities());
             return "borse/edit";
         }
         borsa.setId(id);
         borsaService.save(borsa);
-        return "redirect:/admin/borse";
+        return "redirect:/borse";
     }
 
+    // delete
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         borsaService.deleteById(id);
-        return "redirect:/admin/borse";
+        return "redirect:/borse";
     }
 }

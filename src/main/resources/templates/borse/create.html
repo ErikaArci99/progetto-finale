@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <h1>Crea Nuova Borsa</h1>
 
-        <form th:action="@{/admin/borse/create}" th:object="${borsa}" method="post" class="mt-4">
+        <form th:action="@{/borse/create}" th:object="${borsa}" method="post" class="mt-4">
 
             <div class="mb-3">
                 <label class="form-label">Nome</label>
@@ -29,6 +29,17 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Colore</label>
+                <textarea th:field="*{colore}" step="0.01" class="form-control" placeholder="Colore"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Dimensioni</label>
+                <textarea th:field="*{dimensioni}" step="0.01" class="form-control"
+                    placeholder="Dimensioni 00x00x00"></textarea>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Collezione</label>
                 <select th:field="*{collezione}" class="form-select">
                     <option th:each="collezione : ${collezioni}" th:value="${collezione.id}"
@@ -39,13 +50,15 @@
             <div class="mb-3">
                 <label class="form-label">Sconto</label>
                 <select th:field="*{sconto}" class="form-select">
+                    <option th:value="${null}">Nessuno</option>
                     <option th:each="sconto : ${sconti}" th:value="${sconto.id}" th:text="${sconto.percentuale + '%'}">
                     </option>
                 </select>
             </div>
 
+
             <button type="submit" class="btn btn-primary">Salva</button>
-            <a th:href="@{/admin/borse}" class="btn btn-secondary">Annulla</a>
+            <a th:href="@{/borse}" class="btn btn-secondary">Annulla</a>
         </form>
     </div>
 

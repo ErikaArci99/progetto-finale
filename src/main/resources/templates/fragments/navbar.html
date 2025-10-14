@@ -10,13 +10,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin/borse}">Borse</a>
+                        <a class="nav-link" th:href="@{/borse}">Borse</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin/collezioni}">Collezioni</a>
+                        <a class="nav-link" th:href="@{/collezioni}">Collezioni</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin/sconti}">Sconti</a>
+                        <a class="nav-link" th:href="@{/sconti}">Sconti</a>
                     </li>
                 </ul>
 
@@ -24,6 +24,12 @@
                     Utente: <span th:text="${username}">admin</span> |
                     <span th:text="${ruolo}">ADMIN</span>
                 </span>
+
+                <!-- Pulsante logout -->
+                <form th:action="@{/logout}" method="post" class="m-0 d-inline">
+                    <button type="submit" class="btn btn-outline-primary btn-sm mx-3">Logout</button>
+                </form>
+
             </div>
         </div>
     </nav>

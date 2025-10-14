@@ -9,7 +9,7 @@
 
     <div class="container mt-5">
         <h1>Crea Sconto</h1>
-        <form th:action="@{/admin/sconti/create}" th:object="${sconto}" method="post">
+        <form th:action="@{/sconti/create}" th:object="${sconto}" method="post">
             <div class="mb-3">
                 <label for="percentuale" class="form-label">Percentuale</label>
                 <input type="number" class="form-control" id="percentuale" th:field="*{percentuale}" min="0" max="100">
@@ -29,7 +29,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Salva</button>
-            <a th:href="@{/admin/sconti}" class="btn btn-secondary">Indietro</a>
+            <a th:href="@{/sconti}" class="btn btn-secondary">Indietro</a>
         </form>
     </div>
 

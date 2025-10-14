@@ -8,7 +8,9 @@
 
     <div class="container mt-5">
         <h1>Sconti</h1>
-        <a th:href="@{/admin/sconti/create}" class="btn btn-success mb-3">Crea Nuovo Sconto</a>
+        <!-- Pulsante Crea solo per admin -->
+        <a th:href="@{/sconti/create}" class="btn btn-primary mb-3" th:if="${roles.contains('ADMIN')}">Crea Nuovo
+            Sconto</a>
 
         <table class="table table-striped">
             <thead>
@@ -16,7 +18,7 @@
                     <th>Percentuale</th>
                     <th>Data Inizio</th>
                     <th>Data Fine</th>
-                    <th>Azioni</th>
+                    <th th:if="${roles.contains('ADMIN')}">Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,10 +27,11 @@
                     <td th:text="${sconto.dataInizio}">Data Inizio</td>
                     <td th:text="${sconto.dataFine}">Data Fine</td>
                     <td>
-                        <a th:href="@{/admin/sconti/edit/{id}(id=${sconto.id})}"
-                            class="btn btn-warning btn-sm">Modifica</a>
-                        <form th:action="@{/admin/sconti/delete/{id}(id=${sconto.id})}" method="post"
-                            style="display:inline">
+                        <!-- Modifica ed elimina solo per admin -->
+                        <a th:href="@{/sconti/edit/{id}(id=${sconto.id})}" class="btn btn-warning btn-sm"
+                            th:if="${roles.contains('ADMIN')}">Modifica</a>
+                        <form th:action="@{/sconti/delete/{id}(id=${sconto.id})}" method="post" style="display:inline"
+                            th:if="${roles.contains('ADMIN')}">
                             <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
                         </form>
                     </td>
@@ -36,6 +39,7 @@
             </tbody>
         </table>
     </div>
+
 
     <div th:replace="fragments/footer :: footer"></div>
     <div th:replace="fragments/scripts :: commonScripts"></div>

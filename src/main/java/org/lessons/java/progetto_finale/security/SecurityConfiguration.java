@@ -25,25 +25,32 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        // Risorse pubbliche e login
-                        .requestMatchers("/login", "/css/**", "/js/**", "/images/**").permitAll()
-                        // Backoffice solo admin
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        // Dettaglio borse accessibile a chi è loggato
-                        .requestMatchers("/", "/borse/**").authenticated()
-                        .anyRequest().authenticated())
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/admin/borse", true) // vai sempre qui dopo login
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll())
+                        // risorse pubbliche e pagina di login
+                        .requestMatchers("/css/**").permitAll()
 
+                        // solo ADMIN può creare, modificare o eliminare
+                        .requestMatchers("/borse/create", "/borse/edit/**", "/borse/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/collezioni/create", "/collezioni/edit/**", "/collezioni/delete/**")
+                        .hasRole("ADMIN")
+                        .requestMatchers("/sconti/create", "/sconti/edit/**", "/sconti/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // USER e ADMIN possono solo visualizzare
+                        .requestMatchers("/", "/borse/list", "/collezioni/list", "/sconti/list", "/borse/details/**",
+                                "/collezioni/details/**", "/sconti/details/**")
+                        .hasAnyRole("USER", "ADMIN")
+
+                        // tutto il resto richiede autenticazione
+                        .anyRequest().authenticated())
+
+                // login e impostazioni di sicurezza
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/borse", true) // pagina di default dopo il login
+                )
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
 
+                // servizio utenti
                 .userDetailsService(userDetailsService);
 
         return http.build();

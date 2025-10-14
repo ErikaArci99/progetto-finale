@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/admin/sconti")
+@RequestMapping("/sconti")
 public class ScontoController {
 
     private final ScontoService scontoService;
@@ -39,7 +39,7 @@ public class ScontoController {
         if (result.hasErrors())
             return "sconti/create";
         scontoService.save(sconto);
-        return "redirect:/admin/sconti";
+        return "redirect:/sconti";
     }
 
     @GetMapping("/edit/{id}")
@@ -55,12 +55,12 @@ public class ScontoController {
             return "sconti/edit";
         sconto.setId(id);
         scontoService.save(sconto);
-        return "redirect:/admin/sconti";
+        return "redirect:/sconti";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         scontoService.deleteById(id);
-        return "redirect:/admin/sconti";
+        return "redirect:/sconti";
     }
 }

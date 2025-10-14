@@ -9,7 +9,7 @@
     <div class="container mt-5">
         <h1>Modifica Borsa</h1>
 
-        <form th:action="@{/admin/borse/edit/{id}(id=${borsa.id})}" th:object="${borsa}" method="post" class="mt-4">
+        <form th:action="@{/borse/edit/{id}(id=${borsa.id})}" th:object="${borsa}" method="post" class="mt-4">
 
             <div class="mb-3">
                 <label class="form-label">Nome</label>
@@ -24,27 +24,39 @@
 
             <div class="mb-3">
                 <label class="form-label">Prezzo</label>
-                <input type="number" th:field="*{prezzo}" step="0.01" class="form-control" placeholder="Prezzo">
+                <input type="number" th:field="*{prezzo}" class="form-control" placeholder="Prezzo">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Collezione</label>
                 <select th:field="*{collezione}" class="form-select">
                     <option th:each="collezione : ${collezioni}" th:value="${collezione.id}"
-                        th:text="${collezione.nome}" th:selected="${collezione.id == borsa.collezione?.id}"></option>
+                        th:text="${collezione.nome}">
+                    </option>
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Colore</label>
+                <input type="text" th:field="*{colore}" class="form-control" placeholder="Colore">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Dimensioni</label>
+                <input type="text" th:field="*{dimensioni}" class="form-control" placeholder="Dimensioni">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Sconto</label>
                 <select th:field="*{sconto}" class="form-select">
-                    <option th:each="sconto : ${sconti}" th:value="${sconto.id}" th:text="${sconto.percentuale + '%'}"
-                        th:selected="${sconto.id == borsa.sconto?.id}"></option>
+                    <option th:value="${null}">Nessuno</option>
+                    <option th:each="sconto : ${sconti}" th:value="${sconto.id}" th:text="${sconto.percentuale + '%'}">
+                    </option>
                 </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Salva</button>
-            <a th:href="@{/admin/borse}" class="btn btn-secondary">Annulla</a>
+            <a th:href="@{/borse}" class="btn btn-secondary">Annulla</a>
         </form>
     </div>
 

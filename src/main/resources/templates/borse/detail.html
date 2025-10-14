@@ -22,16 +22,27 @@
 
         <div class="mb-3">
             <strong>Collezione:</strong>
-            <span th:text="${borsa.collezione}"></span>
+            <span th:text="${borsa.collezione.nome}"></span>
         </div>
 
         <div class="mb-3">
-            <strong>Sconto:</strong>
-            <span th:text="${borsa.sconto != null ? borsa.sconto.percentuale + '%' : 'Nessuno'}"></span>
+            <strong>Colore:</strong>
+            <span th:text="${borsa.colore}"></span>
         </div>
 
-        <a th:href="@{/admin/borse}" class="btn btn-secondary">Indietro</a>
-        <a th:href="@{/admin/borse/edit/{id}(id=${borsa.id})}" class="btn btn-warning">Modifica</a>
+        <div class="mb-3">
+            <strong>Dimensioni:</strong>
+            <span th:text="${borsa.dimensioni}"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <strong>Sconto:</strong>
+            <span th:text="${borsa.sconto != null ? '-' + borsa.sconto.percentuale + '%' : 'Nessuno'}"></span>
+        </div>
+
+        <a th:href="@{/borse}" class="btn btn-secondary">Indietro</a>
+        <a th:href="@{/borse/edit/{id}(id=${borsa.id})}" class="btn btn-warning">Modifica</a>
     </div>
 
     <div th:replace="fragments/footer :: footer"></div>

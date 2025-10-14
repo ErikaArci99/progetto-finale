@@ -9,7 +9,9 @@
 
     <div class="container mt-5">
         <h1>Collezioni</h1>
-        <a th:href="@{/admin/collezioni/create}" class="btn btn-success mb-3">Crea Nuova Collezione</a>
+        <!-- Pulsante Crea solo per admin -->
+        <a th:href="@{/collezioni/create}" class="btn btn-primary mb-3" th:if="${roles.contains('ADMIN')}">Crea Nuova
+            Collezione</a>
 
         <table class="table table-striped">
             <thead>
@@ -17,20 +19,22 @@
                     <th>Nome</th>
                     <th>Stagione</th>
                     <th>Descrizione</th>
-                    <th>Azioni</th>
+                    <th th:if="${roles.contains('ADMIN')}">Azioni</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="collezione : ${collezioni}">
+                <tr th:each=" collezione : ${collezioni}">
                     <td th:text="${collezione.nome}">Nome</td>
                     <td th:text="${collezione.stagione}">Stagione</td>
                     <td th:text="${collezione.descrizione}">Descrizione</td>
-                    <td>
-                        <a th:href="@{/admin/collezioni/edit/{id}(id=${collezione.id})}"
-                            class="btn btn-warning btn-sm">Modifica</a>
-                        <form th:action="@{/admin/collezioni/delete/{id}(id=${collezione.id})}" method="post"
-                            style="display:inline">
-                            <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                    <td th:if="${roles.contains('ADMIN')}">
+                        <!-- Modifica ed elimina solo per admin -->
+                        <a th:href="@{/collezioni/edit/{id}(id=${collezione.id})}" class="btn btn-warning btn-sm"
+                            th:if="${roles.contains('ADMIN')}">Modifica</a>
+                        <form th:action="@{/collezioni/delete/{id}(id=${collezione.id})}" method="post"
+                            style="display:inline" th:if="${roles.contains('ADMIN')}">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Sei sicuro di voler eliminare questa collezione?')">Elimina</button>
                         </form>
                     </td>
                 </tr>

@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/admin/collezioni")
+@RequestMapping("/collezioni")
 public class CollezioneController {
 
     private final CollezioneService collezioneService;
@@ -39,7 +39,7 @@ public class CollezioneController {
         if (result.hasErrors())
             return "collezioni/create";
         collezioneService.save(collezione);
-        return "redirect:/admin/collezioni";
+        return "redirect:/collezioni";
     }
 
     @GetMapping("/edit/{id}")
@@ -55,12 +55,12 @@ public class CollezioneController {
             return "collezioni/edit";
         collezione.setId(id);
         collezioneService.save(collezione);
-        return "redirect:/admin/collezioni";
+        return "redirect:/collezioni";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         collezioneService.deleteById(id);
-        return "redirect:/admin/collezioni";
+        return "redirect:/collezioni";
     }
 }
