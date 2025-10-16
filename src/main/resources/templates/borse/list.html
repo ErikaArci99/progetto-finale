@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head th:replace="fragments/head :: commonHead('Lista Borse')"></head>
 
@@ -11,11 +12,11 @@
         <h1>Lista Borse</h1>
 
         <!-- Pulsante aggiungi solo per admin -->
-        <a class="btn btn-primary mb-3" th:href="@{/borse/create}" th:if="${roles.contains('ROLE_ADMIN')}">Aggiungi
+        <a class="btn btn-primary mb-3" th:href="@{/borse/create}" sec:authorize="hasRole('ADMIN')">Aggiungi
             Nuova
             Borsa</a>
 
-        <table class="table table-bordered table-striped">
+        <table class=" table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -39,9 +40,9 @@
 
                         <!-- Modifica ed elimina solo per admin -->
                         <a class="btn btn-warning btn-sm" th:href="@{/borse/edit/{id}(id=${borsa.id})}"
-                            th:if="${roles.contains('ADMIN')}">Modifica</a>
+                            sec:authorize="hasRole('ADMIN')">Modifica</a>
                         <form th:action="@{/borse/delete/{id}(id=${borsa.id})}" method="post"
-                            style="display:inline-block" th:if="${roles.contains('ADMIN')}">
+                            style="display:inline-block" sec:authorize="hasRole('ADMIN')">
                             <button type="submit" class="btn btn-danger btn-sm"
                                 onclick="return confirm('Sei sicuro di voler eliminare questa borsa?')">Elimina</button>
                         </form>

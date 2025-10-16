@@ -21,15 +21,10 @@ public class DatabaseUserDetails implements UserDetails {
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.authorities = new HashSet<>();
+        this.authorities = new HashSet<GrantedAuthority>();
 
-        // Gestione corretta del prefisso ROLE_
-        for (Role userRole : user.getRoles()) {
-            String roleName = userRole.getName();
-            if (!roleName.startsWith("ROLE_")) {
-                roleName = "ROLE_" + roleName;
-            }
-            this.authorities.add(new SimpleGrantedAuthority(roleName));
+        for (Role role : user.getRoles()) {
+            this.authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         }
 
         System.out.println("Authorities di " + user.getUsername() + ": " + authorities);
