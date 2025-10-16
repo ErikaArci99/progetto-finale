@@ -4,12 +4,12 @@
 <head th:replace="fragments/head :: commonHead('Lista Borse')"></head>
 
 <body>
+    <!-- Navbar -->
     <div th:replace="fragments/navbar :: navbar(${users}, ${roles})"></div>
 
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-secondary">Lista Borse</h1>
-            <!-- Pulsante aggiungi solo per admin -->
             <a class="btn btn-outline-secondary" th:href="@{/borse/create}" sec:authorize="hasRole('ADMIN')">
                 Aggiungi Nuova Borsa
             </a>
@@ -17,15 +17,33 @@
 
         <div class="row g-4 form-margin">
             <div class="col-md-6 col-lg-4" th:each="borsa : ${borse}">
-                <div class="card h-100 text-center">
-                    <img th:src="@{${borsa.immagine}}" th:alt="${borsa.nome}" class="card-img-top">
+                <div class="card h-100 text-center shadow-sm">
+                    <!-- immagine uniforme e centrata -->
+                    <div class="card-img-top d-flex justify-content-center align-items-center"
+                        style="height: 300px; overflow: hidden;">
+                        <img th:src="${borsa.immagine}" th:alt="${borsa.nome}"
+                            style="object-fit: contain; max-height: 100%;">
+                    </div>
+
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-color fw-bold" th:text="${borsa.nome}"></h5>
-                        <p class="card-text mb-1"><strong>Prezzo:</strong> <span th:text="${borsa.prezzo}"></span></p>
-                        <p class="card-text mb-1"><strong>Collezione:</strong> <span
-                                th:text="${borsa.collezione.nome}"></span></p>
-                        <p class="card-text mb-3"><strong>Sconto:</strong> <span
-                                th:text="${borsa.sconto != null ? '-' + borsa.sconto.percentuale + '%' : 'Nessuno'}"></span>
+
+                        <p class="card-text mb-1">
+                            <strong>Prezzo:</strong>
+                            <span th:if="${borsa.sconto != null}" class="text-muted text-decoration-line-through"
+                                th:text="${#numbers.formatDecimal(borsa.prezzo, 1, 'POINT', 2, 'COMMA')}"></span>
+                            <span
+                                th:text="${#numbers.formatDecimal(borsa.prezzoScontato, 1, 'POINT', 2, 'COMMA')}"></span>
+                        </p>
+
+                        <p class="card-text mb-1"><strong>Collezione:</strong>
+                            <span th:text="${borsa.collezione.nome}"></span>
+                        </p>
+                        <p class="card-text mb-1"><strong>Colore:</strong>
+                            <span th:text="${borsa.colore}"></span>
+                        </p>
+                        <p class="card-text mb-2"><strong>Brand:</strong>
+                            <span th:text="${borsa.brand}"></span>
                         </p>
 
                         <div class="mt-auto d-flex justify-content-center gap-2 flex-wrap">
@@ -45,6 +63,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <div th:replace="fragments/footer :: footer"></div>
     <div th:replace="fragments/scripts :: commonScripts"></div>
 </body>

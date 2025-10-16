@@ -28,9 +28,6 @@ public class Borsa {
     @Column(nullable = false)
     private Double prezzo;
 
-    @Column
-    private Double prezzoScontato; // Può essere null se non c'è sconto
-
     @NotBlank(message = "Il colore della borsa è obbligatorio")
     @Column(nullable = false, length = 50)
     private String colore;
@@ -55,6 +52,16 @@ public class Borsa {
 
     // Costruttore vuoto
     public Borsa() {
+    }
+
+    // Metodo per calcolare il prezzo finale con lo sconto applicato
+
+    @Transient
+    public Double getPrezzoScontato() {
+        if (sconto != null) {
+            return prezzo * (1 - sconto.getPercentuale() / 100.0);
+        }
+        return prezzo;
     }
 
     // Getters e Setters
@@ -96,14 +103,6 @@ public class Borsa {
 
     public void setPrezzo(Double prezzo) {
         this.prezzo = prezzo;
-    }
-
-    public Double getPrezzoScontato() {
-        return prezzoScontato;
-    }
-
-    public void setPrezzoScontato(Double prezzoScontato) {
-        this.prezzoScontato = prezzoScontato;
     }
 
     public String getColore() {
@@ -153,7 +152,6 @@ public class Borsa {
                 ", nome='" + nome + '\'' +
                 ", descrizione='" + descrizione + '\'' +
                 ", prezzo=" + prezzo +
-                ", prezzoScontato=" + prezzoScontato +
                 ", colore='" + colore + '\'' +
                 ", dimensioni='" + dimensioni + '\'' +
                 ", immagine='" + immagine + '\'' +

@@ -65,6 +65,43 @@ h4 {
     vertical-align: middle;
 }
 
+
+.card-img-top {
+    height: 250px;
+    width: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.text-decoration-line-through {
+    margin-right: 0.5rem;
+}
+
+.card {
+    border-radius: 0.75rem;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-body .btn {
+    flex: 1 1 auto;
+    min-width: 80px;
+}
+
+
 footer {
     height: 70px;
     background-color: #fdfcf8;
