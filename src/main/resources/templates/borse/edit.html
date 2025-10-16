@@ -9,12 +9,19 @@
     <div class="container mt-5">
         <h1>Modifica Borsa</h1>
 
-        <form th:action="@{/borse/edit/{id}(id=${borsa.id})}" th:object="${borsa}" method="post" class="mt-4">
+        <form th:action="@{/borse/edit/{id}(id=${borsa.id})}" th:object="${borsa}" method="post"
+            class="mt-4 form-margin">
 
             <div class="mb-3">
                 <label class="form-label">Nome</label>
                 <input type="text" th:field="*{nome}" class="form-control" placeholder="Nome borsa">
                 <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Brand</label>
+                <input type="text" th:field="*{brand}" class="form-control" placeholder="brand borsa">
+                <div class="text-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></div>
             </div>
 
             <div class="mb-3">

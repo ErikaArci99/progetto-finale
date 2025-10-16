@@ -20,6 +20,9 @@ main {
     flex: 1;
 }
 
+.form-margin {
+    margin-bottom: 110px;
+}
 
 h1,
 h2,

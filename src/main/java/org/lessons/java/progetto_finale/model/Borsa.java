@@ -16,6 +16,10 @@ public class Borsa {
     @Column(nullable = false, length = 100)
     private String nome;
 
+    @NotBlank(message = "Il brand della borsa è obbligatorio")
+    @Column(nullable = false, length = 100)
+    private String brand;
+
     @NotBlank(message = "La descrizione della borsa è obbligatoria")
     @Column(nullable = false, length = 500)
     private String descrizione;
@@ -68,6 +72,14 @@ public class Borsa {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getDescrizione() {

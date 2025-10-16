@@ -8,48 +8,54 @@
 
 
     <div class="container mt-5">
-        <h1 th:text="${borsa.nome}">Nome Borsa</h1>
+        <h1 th:text="${borsa.nome}"></h1>
 
-        <div class="mb-3">
-            <strong>Descrizione:</strong>
-            <p th:text="${borsa.descrizione}"></p>
+        <img th:src="@{${borsa.immagine}}" th:alt="${borsa.nome}">
+
+        <div class="my-3">
+            <strong>Brand:</strong>
+            <span th:text="${borsa.brand}"></span>
+
+            <div class="mb-3 mt-3">
+                <strong>Descrizione:</strong>
+                <p th:text="${borsa.descrizione}"></p>
+            </div>
+
+            <div class="mb-3">
+                <strong>Prezzo:</strong>
+                <span th:text="${borsa.prezzo}"></span>
+            </div>
+
+            <div class="mb-3">
+                <strong>Collezione:</strong>
+                <span th:text="${borsa.collezione.nome}"></span>
+            </div>
+
+            <div class="mb-3">
+                <strong>Colore:</strong>
+                <span th:text="${borsa.colore}"></span>
+            </div>
+
+            <div class="mb-3">
+                <strong>Dimensioni:</strong>
+                <span th:text="${borsa.dimensioni}"></span>
+            </div>
+
+
+            <div class="mb-3">
+                <strong>Sconto:</strong>
+                <span th:text="${borsa.sconto != null ? '-' + borsa.sconto.percentuale + '%' : 'Nessuno'}"></span>
+            </div>
+
+            <a th:href="@{/borse}" class="btn btn-secondary">Indietro</a>
+            <!-- bottone visibile solo agli admin  -->
+            <a th:href="@{/borse/edit/{id}(id=${borsa.id})}" class="btn btn-warning"
+                sec:authorize="hasRole('ADMIN')">Modifica</a>
         </div>
 
-        <div class="mb-3">
-            <strong>Prezzo:</strong>
-            <span th:text="${borsa.prezzo}"></span>
+        <div th:replace=" fragments/footer :: footer">
         </div>
-
-        <div class="mb-3">
-            <strong>Collezione:</strong>
-            <span th:text="${borsa.collezione.nome}"></span>
-        </div>
-
-        <div class="mb-3">
-            <strong>Colore:</strong>
-            <span th:text="${borsa.colore}"></span>
-        </div>
-
-        <div class="mb-3">
-            <strong>Dimensioni:</strong>
-            <span th:text="${borsa.dimensioni}"></span>
-        </div>
-
-
-        <div class="mb-3">
-            <strong>Sconto:</strong>
-            <span th:text="${borsa.sconto != null ? '-' + borsa.sconto.percentuale + '%' : 'Nessuno'}"></span>
-        </div>
-
-        <a th:href="@{/borse}" class="btn btn-secondary">Indietro</a>
-        <!-- bottone visibile solo agli admin  -->
-        <a th:href="@{/borse/edit/{id}(id=${borsa.id})}" class="btn btn-warning"
-            sec:authorize="hasRole('ADMIN')">Modifica</a>
-    </div>
-
-    <div th:replace=" fragments/footer :: footer">
-    </div>
-    <div th:replace="fragments/scripts :: commonScripts"></div>
+        <div th:replace="fragments/scripts :: commonScripts"></div>
 </body>
 
 </html>
