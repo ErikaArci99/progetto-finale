@@ -6,7 +6,6 @@
 <body>
     <div th:replace="fragments/navbar :: navbar(${users}, ${roles})"></div>
 
-
     <div class="container mt-5">
         <h1>Crea Nuova Borsa</h1>
 
@@ -30,18 +29,17 @@
 
             <div class="mb-3">
                 <label class="form-label">Colore</label>
-                <textarea th:field="*{colore}" step="0.01" class="form-control" placeholder="Colore"></textarea>
+                <input type="text" th:field="*{colore}" class="form-control" placeholder="Colore">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Dimensioni</label>
-                <textarea th:field="*{dimensioni}" step="0.01" class="form-control"
-                    placeholder="Dimensioni 00x00x00"></textarea>
+                <input type="text" th:field="*{dimensioni}" class="form-control" placeholder="Dimensioni 00x00x00">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Collezione</label>
-                <select th:field="*{collezione}" class="form-select">
+                <select name="collezioneId" class="form-select">
                     <option th:each="collezione : ${collezioni}" th:value="${collezione.id}"
                         th:text="${collezione.nome}"></option>
                 </select>
@@ -49,11 +47,17 @@
 
             <div class="mb-3">
                 <label class="form-label">Sconto</label>
-                <select th:field="*{sconto}" class="form-select">
+                <select name="scontoId" class="form-select">
                     <option th:value="${null}">Nessuno</option>
                     <option th:each="sconto : ${sconti}" th:value="${sconto.id}" th:text="${sconto.percentuale + '%'}">
                     </option>
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Immagine</label>
+                <input type="text" class="form-control" th:field="*{immagine}" placeholder="URL dell'immagine">
+                <div th:if="${#fields.hasErrors('immagine')}" th:errors="*{immagine}" class="text-danger"></div>
             </div>
 
 

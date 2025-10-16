@@ -28,15 +28,6 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Collezione</label>
-                <select th:field="*{collezione}" class="form-select">
-                    <option th:each="collezione : ${collezioni}" th:value="${collezione.id}"
-                        th:text="${collezione.nome}">
-                    </option>
-                </select>
-            </div>
-
-            <div class="mb-3">
                 <label class="form-label">Colore</label>
                 <input type="text" th:field="*{colore}" class="form-control" placeholder="Colore">
             </div>
@@ -47,13 +38,30 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Sconto</label>
-                <select th:field="*{sconto}" class="form-select">
-                    <option th:value="${null}">Nessuno</option>
-                    <option th:each="sconto : ${sconti}" th:value="${sconto.id}" th:text="${sconto.percentuale + '%'}">
+                <label class="form-label">Collezione</label>
+                <select name="collezioneId" class="form-select">
+                    <option th:each="collezione : ${collezioni}" th:value="${collezione.id}"
+                        th:text="${collezione.nome}"
+                        th:selected="${borsa.collezione != null} ? ${collezione.id} == ${borsa.collezione.id} : false">
                     </option>
                 </select>
             </div>
+
+            <div class="mb-3">
+                <label class="form-label">Sconto</label>
+                <select name="scontoId" class="form-select">
+                    <option th:value="${null}" th:selected="${borsa.sconto == null}">Nessuno</option>
+                    <option th:each="sconto : ${sconti}" th:value="${sconto.id}" th:text="${sconto.percentuale + '%'}"
+                        th:selected="${borsa.sconto != null} ? ${sconto.id} == ${borsa.sconto.id} : false"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Immagine</label>
+                <input type="text" class="form-control" th:field="*{immagine}" placeholder="URL dell'immagine">
+                <div th:if="${#fields.hasErrors('immagine')}" th:errors="*{immagine}" class="text-danger"></div>
+            </div>
+
 
             <button type="submit" class="btn btn-primary">Salva</button>
             <a th:href="@{/borse}" class="btn btn-secondary">Annulla</a>

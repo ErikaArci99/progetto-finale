@@ -48,7 +48,7 @@ public class BorsaController {
         return "borse/detail";
     }
 
-    // create form + create
+    // create form
     @GetMapping("/create")
     public String createForm(Model model, Authentication authentication) {
         model.addAttribute("borsa", new Borsa());
@@ -59,9 +59,14 @@ public class BorsaController {
         return "borse/create";
     }
 
+    // create
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute Borsa borsa, BindingResult bindingResult, Model model,
-            Authentication authentication) {
+    public String create(@Valid @ModelAttribute Borsa borsa,
+            @RequestParam Long collezioneId,
+            @RequestParam(required = false) Long scontoId,
+            BindingResult bindingResult,
+            Model model, Authentication authentication) {
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("collezioni", collezioneService.findAll());
             model.addAttribute("sconti", scontoService.findAll());
@@ -69,11 +74,15 @@ public class BorsaController {
             model.addAttribute("roles", authentication.getAuthorities());
             return "borse/create";
         }
+
+        borsa.setCollezione(collezioneService.findById(collezioneId).orElse(null));
+        borsa.setSconto(scontoId != null ? scontoService.findById(scontoId).orElse(null) : null);
+
         borsaService.save(borsa);
         return "redirect:/borse";
     }
 
-    // edit form + edit
+    // edit form
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model, Authentication authentication) {
         Borsa borsa = borsaService.findById(id)
@@ -86,9 +95,15 @@ public class BorsaController {
         return "borse/edit";
     }
 
+    // edit
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, @Valid @ModelAttribute Borsa borsa, BindingResult bindingResult,
+    public String edit(@PathVariable Long id,
+            @Valid @ModelAttribute Borsa borsa,
+            @RequestParam Long collezioneId,
+            @RequestParam(required = false) Long scontoId,
+            BindingResult bindingResult,
             Model model, Authentication authentication) {
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("collezioni", collezioneService.findAll());
             model.addAttribute("sconti", scontoService.findAll());
@@ -96,7 +111,11 @@ public class BorsaController {
             model.addAttribute("roles", authentication.getAuthorities());
             return "borse/edit";
         }
+
         borsa.setId(id);
+        borsa.setCollezione(collezioneService.findById(collezioneId).orElse(null));
+        borsa.setSconto(scontoId != null ? scontoService.findById(scontoId).orElse(null) : null);
+
         borsaService.save(borsa);
         return "redirect:/borse";
     }
