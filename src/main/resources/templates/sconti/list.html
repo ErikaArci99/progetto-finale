@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/head :: commonHead('Lista Sconti')"></head>
 
@@ -18,7 +18,7 @@
                     <th>Percentuale</th>
                     <th>Data Inizio</th>
                     <th>Data Fine</th>
-                    <th th:if="${roles.contains('ADMIN')}">Azioni</th>
+                    <th sec:authorize="hasRole('ADMIN')">Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +26,7 @@
                     <td th:text="${sconto.percentuale} + '%'">Percentuale</td>
                     <td th:text="${sconto.dataInizio}">Data Inizio</td>
                     <td th:text="${sconto.dataFine}">Data Fine</td>
-                    <td>
+                    <td sec:authorize="hasRole('ADMIN')">
                         <!-- Modifica ed elimina solo per admin -->
                         <a th:href="@{/sconti/edit/{id}(id=${sconto.id})}" class="btn btn-warning btn-sm"
                             th:if="${roles.contains('ADMIN')}">Modifica</a>

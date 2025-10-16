@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/head :: commonHead('Lista Collezioni')"></head>
 
@@ -19,7 +19,7 @@
                     <th>Nome</th>
                     <th>Stagione</th>
                     <th>Descrizione</th>
-                    <th th:if="${roles.contains('ADMIN')}">Azioni</th>
+                    <th sec:authorize="hasRole('ADMIN')">Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +27,12 @@
                     <td th:text="${collezione.nome}">Nome</td>
                     <td th:text="${collezione.stagione}">Stagione</td>
                     <td th:text="${collezione.descrizione}">Descrizione</td>
-                    <td th:if="${roles.contains('ADMIN')}">
+                    <td sec:authorize="hasRole('ADMIN')">
                         <!-- Modifica ed elimina solo per admin -->
-                        <a th:href="@{/collezioni/edit/{id}(id=${collezione.id})}" class="btn btn-warning btn-sm"
-                            th:if="${roles.contains('ADMIN')}">Modifica</a>
-                        <form th:action="@{/collezioni/delete/{id}(id=${collezione.id})}" method="post"
-                            style="display:inline" th:if="${roles.contains('ADMIN')}">
+                        <a th:href=" @{/collezioni/edit/{id}(id=${collezione.id})}" class="btn btn-warning btn-sm">
+                            Modifica</a>
+                        <form th:action=" @{/collezioni/delete/{id}(id=${collezione.id})}" method="post"
+                            style="display:inline">
                             <button type="submit" class="btn btn-danger btn-sm"
                                 onclick="return confirm('Sei sicuro di voler eliminare questa collezione?')">Elimina</button>
                         </form>
