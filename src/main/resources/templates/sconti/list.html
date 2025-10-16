@@ -7,9 +7,10 @@
     <div th:replace="fragments/navbar :: navbar(${users}, ${roles})"></div>
 
     <div class="container mt-5">
-        <h1>Sconti</h1>
+        <h1 class="text-secondary">Sconti</h1>
         <!-- Pulsante Crea solo per admin -->
-        <a th:href="@{/sconti/create}" class="btn btn-outline-primary mb-3" sec:authorize="hasRole('ADMIN')">Crea Nuovo
+        <a th:href="@{/sconti/create}" class="btn btn-outline-secondary mb-3" sec:authorize="hasRole('ADMIN')">Crea
+            Nuovo
             Sconto</a>
 
         <table class=" table table-striped">

@@ -3,11 +3,20 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #fdfcf8;
+    background-color: white;
     color: #2c2c2c;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
 }
 
 .wrapper {

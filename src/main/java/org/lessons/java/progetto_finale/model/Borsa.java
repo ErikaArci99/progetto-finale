@@ -37,7 +37,7 @@ public class Borsa {
     private String dimensioni;
 
     @NotBlank(message = "L'immagine della borsa è obbligatoria")
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String immagine;
 
     // Relazione con Collezione
