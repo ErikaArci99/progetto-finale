@@ -37,7 +37,21 @@ h4 {
     border-color: #bfa67a;
 }
 
+.text-color {
+    color: #bfa67a;
+}
+
+.btn-outline-primary {
+    border-color: #bfa67a;
+    color: #bfa67a;
+}
+
 .btn-primary:hover {
+    background-color: #a89065;
+    border-color: #a89065;
+}
+
+.btn-outline-primary:hover {
     background-color: #a89065;
     border-color: #a89065;
 }

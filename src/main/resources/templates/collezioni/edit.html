@@ -27,8 +27,12 @@
                 <textarea class="form-control" id="descrizione" th:field="*{descrizione}"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salva</button>
-            <a th:href="@{/collezioni}" class="btn btn-secondary">Indietro</a>
+            <button type="submit" class="btn btn-outline-primary">Salva</button>
+            <a th:href="@{/collezioni}" class="btn btn-outline-secondary">Indietro</a>
+            <form th:action=" @{/collezioni/delete/{id}(id=${collezione.id})}" method="post" style="display:inline">
+                <button type="submit" class="btn btn-outline-danger"
+                    onclick="return confirm('Sei sicuro di voler eliminare questa collezione?')">Elimina</button>
+            </form>
         </form>
     </div>
 

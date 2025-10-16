@@ -10,7 +10,8 @@
     <div class="container mt-5">
         <h1>Collezioni</h1>
         <!-- Pulsante Crea solo per admin -->
-        <a th:href="@{/collezioni/create}" class="btn btn-primary mb-3" sec:authorize="hasRole('ADMIN')">Crea Nuova
+        <a th:href="@{/collezioni/create}" class="btn btn-outline-primary mb-3" sec:authorize="hasRole('ADMIN')">Crea
+            Nuova
             Collezione</a>
 
         <table class=" table table-striped">
@@ -29,11 +30,12 @@
                     <td th:text="${collezione.descrizione}">Descrizione</td>
                     <td sec:authorize="hasRole('ADMIN')">
                         <!-- Modifica ed elimina solo per admin -->
-                        <a th:href=" @{/collezioni/edit/{id}(id=${collezione.id})}" class="btn btn-warning btn-sm">
+                        <a th:href=" @{/collezioni/edit/{id}(id=${collezione.id})}"
+                            class="btn btn-outline-warning btn-sm">
                             Modifica</a>
                         <form th:action=" @{/collezioni/delete/{id}(id=${collezione.id})}" method="post"
                             style="display:inline">
-                            <button type="submit" class="btn btn-danger btn-sm"
+                            <button type="submit" class="btn btn-outline-danger btn-sm"
                                 onclick="return confirm('Sei sicuro di voler eliminare questa collezione?')">Elimina</button>
                         </form>
                     </td>

@@ -6,56 +6,37 @@
 <body>
     <div th:replace="fragments/navbar :: navbar(${users}, ${roles})"></div>
 
+    <div class="container my-5 d-flex justify-content-center">
+        <div class="card text-center form-margin">
+            <img th:src="@{${borsa.immagine}}" th:alt="${borsa.nome}" class="card-img-top">
+            <div class="card-body">
+                <h3 class="card-title mb-3 text-color" th:text="${borsa.nome}"></h3>
 
-    <div class="container mt-5">
-        <h1 th:text="${borsa.nome}"></h1>
+                <p class="card-text"><strong>Brand:</strong> <span th:text="${borsa.brand}"></span></p>
+                <p class="card-text"><strong>Descrizione:</strong> <span th:text="${borsa.descrizione}"></span></p>
+                <p class="card-text"><strong>Prezzo:</strong> <span th:text="${borsa.prezzo}"></span></p>
+                <p class="card-text"><strong>Collezione:</strong> <span th:text="${borsa.collezione.nome}"></span></p>
+                <p class="card-text"><strong>Colore:</strong> <span th:text="${borsa.colore}"></span></p>
+                <p class="card-text"><strong>Dimensioni:</strong> <span th:text="${borsa.dimensioni}"></span></p>
+                <p class="card-text"><strong>Sconto:</strong> <span
+                        th:text="${borsa.sconto != null ? '-' + borsa.sconto.percentuale + '%' : 'Nessuno'}"></span></p>
 
-        <img th:src="@{${borsa.immagine}}" th:alt="${borsa.nome}">
-
-        <div class="my-3">
-            <strong>Brand:</strong>
-            <span th:text="${borsa.brand}"></span>
-
-            <div class="mb-3 mt-3">
-                <strong>Descrizione:</strong>
-                <p th:text="${borsa.descrizione}"></p>
+                <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
+                    <a th:href="@{/borse}" class="btn btn-outline-secondary">Indietro</a>
+                    <a th:href="@{/borse/edit/{id}(id=${borsa.id})}" class="btn btn-outline-warning"
+                        sec:authorize="hasRole('ADMIN')">Modifica</a>
+                    <form th:action="@{/borse/delete/{id}(id=${borsa.id})}" method="post"
+                        sec:authorize="hasRole('ADMIN')">
+                        <button type="submit" class="btn btn-outline-danger"
+                            onclick="return confirm('Sei sicuro di voler eliminare questa borsa?')">Elimina</button>
+                    </form>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <strong>Prezzo:</strong>
-                <span th:text="${borsa.prezzo}"></span>
-            </div>
-
-            <div class="mb-3">
-                <strong>Collezione:</strong>
-                <span th:text="${borsa.collezione.nome}"></span>
-            </div>
-
-            <div class="mb-3">
-                <strong>Colore:</strong>
-                <span th:text="${borsa.colore}"></span>
-            </div>
-
-            <div class="mb-3">
-                <strong>Dimensioni:</strong>
-                <span th:text="${borsa.dimensioni}"></span>
-            </div>
-
-
-            <div class="mb-3">
-                <strong>Sconto:</strong>
-                <span th:text="${borsa.sconto != null ? '-' + borsa.sconto.percentuale + '%' : 'Nessuno'}"></span>
-            </div>
-
-            <a th:href="@{/borse}" class="btn btn-secondary">Indietro</a>
-            <!-- bottone visibile solo agli admin  -->
-            <a th:href="@{/borse/edit/{id}(id=${borsa.id})}" class="btn btn-warning"
-                sec:authorize="hasRole('ADMIN')">Modifica</a>
         </div>
+    </div>
 
-        <div th:replace=" fragments/footer :: footer">
-        </div>
-        <div th:replace="fragments/scripts :: commonScripts"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: commonScripts"></div>
 </body>
 
 </html>

@@ -28,8 +28,11 @@
                 <div th:if="${#fields.hasErrors('dataFine')}" th:errors="*{dataFine}" class="text-danger"></div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salva</button>
-            <a th:href="@{/sconti}" class="btn btn-secondary">Indietro</a>
+            <button type="submit" class="btn btn-outline-primary">Salva</button>
+            <a th:href="@{/sconti}" class="btn btn-outline-secondary">Indietro</a>
+            <form th:action="@{/sconti/delete/{id}(id=${sconto.id})}" method="post" style="display:inline">
+                <button type="submit" class="btn btn-outline-danger">Elimina</button>
+            </form>
         </form>
     </div>
 

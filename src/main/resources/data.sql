@@ -28,7 +28,7 @@ VALUES
 INSERT INTO `borsa` 
 (`nome`, `descrizione`, `prezzo`, `prezzo_scontato`, `colore`, `dimensioni`, `immagine`, `collezione_id`, `sconto_id`, `brand`) 
 VALUES 
-('Borsa Elegance', 'Borsa in pelle nera con dettagli dorati', 149.99, NULL, 'Nero', '30x20x10 cm', 'borsa_elegance.jpg', 1, NULL, 'LuxBag'),
-('Borsa Summer Vibes', 'Borsa in tessuto colorato, perfetta per l’estate', 79.99, 59.99, 'Azzurro', '35x25x12 cm', 'borsa_summer.jpg', 2, 1, 'SunnyStyle'),
-('Borsa Classic', 'Design minimal in cuoio marrone', 120.00, NULL, 'Marrone', '32x22x11 cm', 'borsa_classic.jpg', 1, NULL, 'ClassicLeather'),
-('Borsa Sunset', 'Borsa arancione con riflessi dorati, ideale per l’estate', 99.99, 69.99, 'Arancione', '33x21x10 cm', 'borsa_sunset.jpg', 2, 2, 'SunshineBag');
+('Borsa Elegance', 'Borsa in pelle nera con dettagli dorati', 149.99, NULL, 'Nero', '30x20x10 cm', 'https://picsum.photos/id/1011/400/300', 1, NULL, 'LuxBag'),
+('Borsa Summer Vibes', 'Borsa in tessuto colorato, perfetta per l’estate', 79.99, 59.99, 'Azzurro', '35x25x12 cm', 'https://picsum.photos/id/1025/400/300', 2, 1, 'SunnyStyle'),
+('Borsa Classic', 'Design minimal in cuoio marrone', 120.00, NULL, 'Marrone', '32x22x11 cm', 'https://picsum.photos/id/1035/400/300', 1, NULL, 'ClassicLeather'),
+('Borsa Sunset', 'Borsa arancione con riflessi dorati, ideale per l’estate', 99.99, 69.99, 'Arancione', '33x21x10 cm', 'https://picsum.photos/id/1045/400/300', 2, 2, 'SunshineBag');

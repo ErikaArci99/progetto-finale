@@ -21,13 +21,13 @@
                 </ul>
 
                 <span class="navbar-text text-dark fw-semibold">
-                    Utente: <span th:text="${username}">admin</span> |
-                    <span th:text="${ruolo}">ADMIN</span>
+                    Utente: <span class="text-color" th:text="${username}">admin</span> |
+                    <span class="text-color" th:text="${ruolo}">ADMIN</span>
                 </span>
 
                 <!-- Pulsante logout -->
                 <form th:action="@{/logout}" method="post" class="m-0 d-inline">
-                    <button type="submit" class="btn btn-outline-primary btn-sm mx-3">Logout</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm mx-3">Logout</button>
                 </form>
 
             </div>

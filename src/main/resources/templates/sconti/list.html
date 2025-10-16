@@ -9,7 +9,7 @@
     <div class="container mt-5">
         <h1>Sconti</h1>
         <!-- Pulsante Crea solo per admin -->
-        <a th:href="@{/sconti/create}" class="btn btn-primary mb-3" sec:authorize="hasRole('ADMIN')">Crea Nuovo
+        <a th:href="@{/sconti/create}" class="btn btn-outline-primary mb-3" sec:authorize="hasRole('ADMIN')">Crea Nuovo
             Sconto</a>
 
         <table class=" table table-striped">
@@ -27,9 +27,11 @@
                     <td th:text="${sconto.dataInizio}"></td>
                     <td th:text="${sconto.dataFine}"></td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <a th:href="@{/sconti/edit/{id}(id=${sconto.id})}" class="btn btn-warning btn-sm">Modifica</a>
-                        <form th:action="@{/sconti/delete/{id}(id=${sconto.id})}" method="post" style="display:inline">
-                            <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                        <a th:href="@{/sconti/edit/{id}(id=${sconto.id})}"
+                            class="btn btn-outline-warning btn-sm">Modifica</a>
+                        <form th:action=" @{/sconto/delete/{id}(id=${sconto.id})}" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-outline-danger btn-sm"
+                                onclick="return confirm('Sei sicuro di voler eliminare questo sconto?')">Elimina</button>
                         </form>
                     </td>
                 </tr>
