@@ -12,13 +12,19 @@
             <div class="card-body">
                 <h3 class="card-title mb-3 text-color" th:text="${borsa.nome}"></h3>
 
-                <p class="card-text"><strong>Brand:</strong> <span th:text="${borsa.brand}"></span></p>
-                <p class="card-text"><strong>Descrizione:</strong> <span th:text="${borsa.descrizione}"></span></p>
-                <p class="card-text"><strong>Prezzo:</strong> <span th:text="${borsa.prezzo}"></span></p>
-                <p class="card-text"><strong>Collezione:</strong> <span th:text="${borsa.collezione.nome}"></span></p>
-                <p class="card-text"><strong>Colore:</strong> <span th:text="${borsa.colore}"></span></p>
-                <p class="card-text"><strong>Dimensioni:</strong> <span th:text="${borsa.dimensioni}"></span></p>
-                <p class="card-text"><strong>Sconto:</strong> <span
+                <p class="card-text"><strong class="text-secondary">Brand:</strong> <span
+                        th:text="${borsa.brand}"></span></p>
+                <p class="card-text"><strong class="text-secondary">Descrizione:</strong> <span
+                        th:text="${borsa.descrizione}"></span></p>
+                <p class="card-text"><strong class="text-secondary">Prezzo:</strong> <span
+                        th:text="${borsa.prezzo}"></span></p>
+                <p class="card-text"><strong class="text-secondary">Collezione:</strong> <span
+                        th:text="${borsa.collezione.nome}"></span></p>
+                <p class="card-text"><strong class="text-secondary">Colore:</strong> <span
+                        th:text="${borsa.colore}"></span></p>
+                <p class="card-text"><strong class="text-secondary">Dimensioni:</strong> <span
+                        th:text="${borsa.dimensioni}"></span></p>
+                <p class="card-text"><strong class="text-secondary">Sconto:</strong> <span
                         th:text="${borsa.sconto != null ? '-' + borsa.sconto.percentuale + '%' : 'Nessuno'}"></span></p>
 
                 <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">

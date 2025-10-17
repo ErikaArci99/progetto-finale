@@ -29,21 +29,21 @@
                         <h5 class="card-title text-color fw-bold" th:text="${borsa.nome}"></h5>
 
                         <p class="card-text mb-1">
-                            <strong>Prezzo:</strong>
+                            <strong class="text-secondary">Prezzo:</strong>
                             <span th:if="${borsa.sconto != null}" class="text-muted text-decoration-line-through"
                                 th:text="${#numbers.formatDecimal(borsa.prezzo, 1, 'POINT', 2, 'COMMA')}"></span>
                             <span
                                 th:text="${#numbers.formatDecimal(borsa.prezzoScontato, 1, 'POINT', 2, 'COMMA')}"></span>
                         </p>
 
-                        <p class="card-text mb-1"><strong>Collezione:</strong>
+                        <p class="card-text mb-2"><strong class="text-secondary">Brand:</strong>
+                            <span th:text="${borsa.brand}"></span>
+                        </p>
+                        <p class="card-text mb-1"><strong class="text-secondary">Collezione:</strong>
                             <span th:text="${borsa.collezione.nome}"></span>
                         </p>
-                        <p class="card-text mb-1"><strong>Colore:</strong>
+                        <p class="card-text mb-1"><strong class="text-secondary">Colore:</strong>
                             <span th:text="${borsa.colore}"></span>
-                        </p>
-                        <p class="card-text mb-2"><strong>Brand:</strong>
-                            <span th:text="${borsa.brand}"></span>
                         </p>
 
                         <div class="mt-auto d-flex justify-content-center gap-2 flex-wrap">

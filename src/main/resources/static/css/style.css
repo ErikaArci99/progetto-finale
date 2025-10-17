@@ -17,6 +17,7 @@ body {
     left: 0;
     z-index: 1000;
     width: 100%;
+    background-color: #FDFCF8;
 }
 
 .wrapper {
@@ -67,6 +68,7 @@ h4 {
 
 .table th {
     background-color: #f7f5f2;
+    color: #bfa67a;
 }
 
 .table td,

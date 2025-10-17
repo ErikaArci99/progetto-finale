@@ -1,7 +1,7 @@
 <div th:fragment="navbar(username, ruolo)" th:if="${username != null}">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text" href="#">Borse Luxury Backoffice</a>
+            <a class="navbar-brand fw-bold text-secondary" href="#">Borse Luxury Backoffice</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -10,13 +10,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/borse}">Borse</a>
+                        <a class="nav-link text-color" th:href="@{/borse}">Borse</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/collezioni}">Collezioni</a>
+                        <a class="nav-link text-color" th:href="@{/collezioni}">Collezioni</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/sconti}">Sconti</a>
+                        <a class="nav-link text-color" th:href="@{/sconti}">Sconti</a>
                     </li>
                 </ul>
 
