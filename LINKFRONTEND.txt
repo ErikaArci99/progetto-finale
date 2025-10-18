@@ -1,0 +1,2 @@
+Inserisco qui il link della repository del lato fronend del progetto.
+https://github.com/ErikaArci99/progetto-finale-react.git

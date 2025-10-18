@@ -3,6 +3,7 @@ package org.lessons.java.progetto_finale.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "borsa")
@@ -43,18 +44,17 @@ public class Borsa {
     // Relazione con Collezione
     @ManyToOne
     @JoinColumn(name = "collezione_id")
+    @JsonIgnoreProperties("borse") // evita il ciclo infinito ma permette di leggere nome, stagione, ecc.
     private Collezione collezione;
 
     // Relazione con Sconto
     @ManyToOne
     @JoinColumn(name = "sconto_id")
+    @JsonIgnoreProperties("borse")
     private Sconto sconto;
 
-    // Costruttore vuoto
     public Borsa() {
     }
-
-    // Metodo per calcolare il prezzo finale con lo sconto applicato
 
     @Transient
     public Double getPrezzoScontato() {

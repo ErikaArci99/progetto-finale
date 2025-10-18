@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "collezione")
@@ -15,21 +16,20 @@ public class Collezione {
 
     @NotBlank(message = "Il nome della collezione è obbligatorio")
     @Column(nullable = false, length = 100)
-    private String nome; // es. "Autunno 2025"
+    private String nome;
 
     @NotBlank(message = "La stagione della collezione è obbligatoria")
     @Column(nullable = false, length = 50)
-    private String stagione; // Autunno/Inverno
+    private String stagione;
 
     @NotBlank(message = "La descrizione della collezione è obbligatoria")
     @Column(nullable = false, length = 500)
     private String descrizione;
 
-    // Relazione con Borsa: una collezione può avere molte borse
     @OneToMany(mappedBy = "collezione", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // indica a Jackson che questa lista è il lato gestito della relazione con Borsa
     private List<Borsa> borse = new ArrayList<>();
 
-    // Costruttore vuoto
     public Collezione() {
     }
 

@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "sconto")
@@ -18,7 +21,7 @@ public class Sconto {
     @Min(value = 0, message = "Lo sconto non può essere negativo")
     @Max(value = 100, message = "Lo sconto non può superare il 100%")
     @Column(nullable = false)
-    private Integer percentuale; // percentuale di sconto da 0 a 100
+    private Integer percentuale;
 
     @NotNull(message = "La data di inizio dello sconto è obbligatoria")
     @Column(nullable = false)
@@ -28,7 +31,10 @@ public class Sconto {
     @Column(nullable = false)
     private LocalDate dataFine;
 
-    // Costruttore vuoto
+    @OneToMany(mappedBy = "sconto")
+    @JsonManagedReference // indica a Jackson che questa lista è il lato gestito della relazione con Borsa
+    private List<Borsa> borse = new ArrayList<>();
+
     public Sconto() {
     }
 
@@ -63,6 +69,14 @@ public class Sconto {
 
     public void setDataFine(LocalDate dataFine) {
         this.dataFine = dataFine;
+    }
+
+    public List<Borsa> getBorse() {
+        return borse;
+    }
+
+    public void setBorse(List<Borsa> borse) {
+        this.borse = borse;
     }
 
     @Override

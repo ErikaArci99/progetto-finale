@@ -25,6 +25,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
+                        // rendi pubbliche le API per React
+                        .requestMatchers("/api/**").permitAll()
+
                         // risorse pubbliche e pagina di login
                         .requestMatchers("/css/**").permitAll()
 
@@ -47,10 +50,14 @@ public class SecurityConfiguration {
                 .formLogin(form -> form
                         .defaultSuccessUrl("/borse", true) // pagina di default dopo il login
                 )
-                .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable())
 
-                // servizio utenti
+                // disattiva CSRF solo per le API REST
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
+
+                // abilita CORS (necessario per React)
+                .cors(cors -> {
+                })
+
                 .userDetailsService(userDetailsService);
 
         return http.build();
