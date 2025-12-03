@@ -2,6 +2,7 @@ package org.lessons.java.progetto_finale.api;
 
 import org.lessons.java.progetto_finale.model.Sconto;
 import org.lessons.java.progetto_finale.service.ScontoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class ScontoRestController {
 
-    private final ScontoService scontoService;
+    @Autowired
+    private ScontoService scontoService;
 
     public ScontoRestController(ScontoService scontoService) {
         this.scontoService = scontoService;

@@ -2,6 +2,7 @@ package org.lessons.java.progetto_finale.api;
 
 import org.lessons.java.progetto_finale.model.Borsa;
 import org.lessons.java.progetto_finale.service.BorsaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173") // consente chiamate da React
 public class BorsaRestController {
 
-    private final BorsaService borsaService;
+    @Autowired
+    private BorsaService borsaService;
 
     public BorsaRestController(BorsaService borsaService) {
         this.borsaService = borsaService;
