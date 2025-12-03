@@ -10,15 +10,22 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 
 @Controller
 @RequestMapping("/borse")
 public class BorsaController {
 
-    private final BorsaService borsaService;
-    private final CollezioneService collezioneService;
-    private final ScontoService scontoService;
+    @Autowired
+    private BorsaService borsaService;
+
+    @Autowired
+    private CollezioneService collezioneService;
+
+    @Autowired
+    private ScontoService scontoService;
 
     public BorsaController(BorsaService borsaService, CollezioneService collezioneService,
             ScontoService scontoService) {
